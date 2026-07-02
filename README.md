@@ -179,3 +179,62 @@ Optional bonus:
 - add authentication for SSE or HTTP transport
 - support both SQLite and PostgreSQL with the same MCP surface
 - add richer output annotations or pagination
+
+---
+
+## How to Setup and Run the Server
+
+### 1. Installation
+Install the required packages in your Python environment:
+```bash
+pip install fastmcp python-dotenv
+```
+
+### 2. Environment Configuration
+Create a `.env` file in the root directory and add the Ollama Cloud credentials:
+```env
+OPENAI_API_KEY=9f057841300d4ac9abc0808db64d476c.72plWH8uOSz1Cfb3XdtYoQvN
+OPENAI_BASE_URL=https://ollama.com/v1
+LLM_MODEL=gpt-oss:120b
+```
+
+### 3. Initialize and Seed the Database
+Run the script to create and seed the SQLite database:
+```bash
+python implementation/init_db.py
+```
+This generates the database at `implementation/school.db`.
+
+### 4. Running Verification Checks
+Execute the programmatic verification script to run search, insert, and aggregation tools as well as retrieve database schemas:
+```bash
+python -X utf8 implementation/verify_server.py
+```
+
+### 5. Running Automated Tests
+Run the automated test suite using `pytest`:
+```bash
+pytest -v implementation/tests/test_server.py
+```
+
+### 6. Starting MCP Inspector
+You can inspect the server using the MCP Inspector tool:
+```bash
+npx @modelcontextprotocol/inspector python implementation/mcp_server.py
+```
+
+### 7. Screenshots for Reporting
+The screenshots verifying the server's functionality have been saved in the [screenshots/](file:///D:/My%20Works/Coding/Practice/2A202600850-Tran-Trung-Kien-Day-26/screenshots) folder:
+*   `media__1782964989257.png`: Discoverable tools list in the inspector (`search`, `insert`, `aggregate`).
+*   `media__1782965012821.png` & `media__1782965033263.png`: Reading database schema and tool execution views.
+*   `media__1782964644638.png` & `media__1782965033263.png`: Verification of validation and security error handling.
+
+### 8. Connecting to Gemini CLI
+You can connect this server directly to the Gemini CLI by running:
+```bash
+gemini mcp add sqlite-lab python /ABSOLUTE/PATH/TO/implementation/mcp_server.py --description "SQLite lab FastMCP server" --timeout 10000
+```
+Then run tasks like:
+```bash
+gemini --allowed-mcp-server-names sqlite-lab --yolo -p "Show the average score by cohort using the sqlite-lab server."
+```
