@@ -229,7 +229,11 @@ The screenshots verifying the server's functionality have been saved in the [scr
 *   `media__1782965012821.png` & `media__1782965033263.png`: Reading database schema and tool execution views.
 *   `media__1782964644638.png` & `media__1782965033263.png`: Verification of validation and security error handling.
 
-### 8. Connecting to Gemini CLI
+### 8. Demo Video
+The project demonstration video is available at:
+*   [Google Drive Demo Video](https://drive.google.com/file/d/1wLGyeNZMtblA-qBafoDFlbjBddIt0N73/view?usp=drive_link)
+
+### 9. Connecting to Gemini CLI
 You can connect this server directly to the Gemini CLI by running:
 ```bash
 gemini mcp add sqlite-lab python /ABSOLUTE/PATH/TO/implementation/mcp_server.py --description "SQLite lab FastMCP server" --timeout 10000
